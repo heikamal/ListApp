@@ -1,20 +1,19 @@
 package com.example.listapp;
 
 import android.os.Bundle;
-import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-/**
- * Luokka fragmentille, jonka on tarkoitus esittää käyttäjän luoma lista.
- */
-public class ItemDetailFragment extends Fragment {
+import android.view.View;
 
-    public ItemDetailFragment() {
-        super(R.layout.fragment_item_detail);
-    }
+/**
+ * Luokka yksittäisen käyttäjän luoman listan osaa varten.
+ */
+public class UserListEntryFragment extends Fragment {
+
+    public UserListEntryFragment() {super(R.layout.user_list_entry);}
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
