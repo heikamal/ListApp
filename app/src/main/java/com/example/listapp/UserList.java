@@ -1,11 +1,12 @@
 package com.example.listapp;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Luokka, jonka oliot pitävät sisällään jokainen yhden käyttäjän luoman listan.
  */
-public class UserList {
+public class UserList implements Serializable {
 
     private String name;
 

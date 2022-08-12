@@ -12,13 +12,15 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
+
 
 public class MainListAdapter extends
         RecyclerView.Adapter<MainListAdapter.ViewHolder>{
 
-    UserList[] lists;
+    ArrayList<UserList> lists;
 
-    public MainListAdapter(UserList[] data){lists = data;}
+    public MainListAdapter(ArrayList<UserList> data){lists = data;}
 
     @NonNull
     @Override
@@ -33,12 +35,12 @@ public class MainListAdapter extends
         holder.itemView.setTag(position);
         holder.itemView.setOnClickListener(MainListClickListener);
 
-        holder.textView.setText(lists[position].getName());
+        holder.textView.setText(lists.get(position).getName());
     }
 
     @Override
     public int getItemCount() {
-        return lists.length;
+        return lists.size();
     }
 
     View.OnClickListener MainListClickListener = new View.OnClickListener() {
@@ -46,7 +48,7 @@ public class MainListAdapter extends
         public void onClick(View v) {
             int position = (int) v.getTag();
             Bundle bundle = new Bundle();
-            bundle.putStringArrayList("userList", lists[position].getList());
+            bundle.putStringArrayList("userList", lists.get(position).getList());
             NavController navController = Navigation.findNavController(v);
             navController.navigate(R.id.userListFragment, bundle);
         }

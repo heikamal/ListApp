@@ -26,7 +26,7 @@ public class MainListFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         RecyclerView rvMainList = view.findViewById(R.id.rvMainList);
 
-        UserList[] lists = getLists();
+        ArrayList<UserList> lists = MainActivity.lists.fetchLists();
         rvMainList.setAdapter(new MainListAdapter(lists));
         rvMainList.setLayoutManager(new LinearLayoutManager(getContext()));
 
