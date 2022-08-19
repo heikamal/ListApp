@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.View;
+import android.widget.Adapter;
 
 import java.util.ArrayList;
 
@@ -20,17 +21,37 @@ import java.util.ArrayList;
  */
 public class MainListFragment extends Fragment {
 
+    ArrayList<UserList> lists;
+    MainListAdapter adapter;
+
+    private static MainListFragment instance;
+
     public MainListFragment() {super(R.layout.fragment_list_main);}
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+
+        instance = this;
+
         RecyclerView rvMainList = view.findViewById(R.id.rvMainList);
 
-        ArrayList<UserList> lists = MainActivity.lists.fetchLists();
-        rvMainList.setAdapter(new MainListAdapter(lists));
+        lists = MainActivity.lists.fetchLists();
+        adapter = new MainListAdapter(lists);
+        rvMainList.setAdapter(adapter);
         rvMainList.setLayoutManager(new LinearLayoutManager(getContext()));
 
         super.onViewCreated(view, savedInstanceState);
+    }
+
+    public void updateList(UserList newList){
+        lists.add(newList);
+        int pos = lists.indexOf(newList);
+        adapter.notifyItemInserted(pos);
+    }
+
+    public static MainListFragment getInstance()
+    {
+        return instance;
     }
 
     public UserList[] getLists(){

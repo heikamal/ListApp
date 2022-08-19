@@ -15,7 +15,7 @@ public class UserList implements Serializable {
      */
     private ArrayList<String> list;
 
-    public int length;
+    private int length;
 
     public String getName() {
         return name;
@@ -41,6 +41,11 @@ public class UserList implements Serializable {
         this.list = list;
     }
 
+    public int getLength(){
+        this.length = this.list.size();
+        return length;
+    }
+
     /**
      * Parametrillinen alustaja.
      * @param list
@@ -48,6 +53,11 @@ public class UserList implements Serializable {
     public UserList(ArrayList<String> list){
         this.list = list;
         this.length = list.size();
+    }
+
+    public UserList(String name){
+        this.name = name;
+        this.list = new ArrayList<>();
     }
 
     /**
