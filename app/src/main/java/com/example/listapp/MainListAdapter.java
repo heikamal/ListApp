@@ -48,7 +48,7 @@ public class MainListAdapter extends
         public void onClick(View v) {
             int position = (int) v.getTag();
             Bundle bundle = new Bundle();
-            bundle.putStringArrayList("userList", lists.get(position).getList());
+            bundle.putSerializable("userList", lists.get(position));
             NavController navController = Navigation.findNavController(v);
             navController.navigate(R.id.userListFragment, bundle);
         }

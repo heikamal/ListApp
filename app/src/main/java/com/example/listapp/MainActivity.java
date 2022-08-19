@@ -5,11 +5,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.View;
 import android.widget.EditText;
+
+import java.io.File;
 
 /**
  * Ohjelman pääaktiviteetti, sisältää ensimmäisen näkymän minkä käyttäjä näkee.
@@ -18,12 +21,17 @@ public class MainActivity extends AppCompatActivity {
 
     static ListsOfLists lists;
 
+    static MainListFragment frag;
+
     private String m_Text = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        lists = new ListsOfLists();
+        File file = new File(getFilesDir() + "/lists.bin");
+        frag = MainListFragment.getInstance();
+
+        lists = new ListsOfLists(file);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
     }
@@ -46,7 +54,6 @@ public class MainActivity extends AppCompatActivity {
                 m_Text = input.getText().toString();
                 UserList newList = new UserList(m_Text);
                 lists.addList(newList);
-                MainListFragment frag = MainListFragment.getInstance();
                 frag.updateList(newList);
             }
         });

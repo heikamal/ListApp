@@ -17,6 +17,7 @@ import java.util.ArrayList;
 public class UserListFragment extends Fragment {
 
     ArrayList<String> list;
+    UserList userList;
     UserListAdapter adapter;
 
     private static UserListFragment instance;
@@ -31,9 +32,9 @@ public class UserListFragment extends Fragment {
         instance = this;
 
         RecyclerView rvUserList = view.findViewById(R.id.rvUserList);
-        list = getArguments().getStringArrayList("userList");
+        userList = (UserList) getArguments().getSerializable("userList");
 
-        adapter = new UserListAdapter(list);
+        adapter = new UserListAdapter(userList);
         rvUserList.setAdapter(adapter);
         rvUserList.setLayoutManager(new LinearLayoutManager(getContext()));
 
@@ -41,9 +42,17 @@ public class UserListFragment extends Fragment {
     }
 
     public void updateList(String text){
-        list.add(text);
-        int pos = list.indexOf(text);
+        int userListPos = MainActivity.lists.findList(userList);
+
+        userList.addToList(text);
+        int pos = userList.getList().indexOf(text);
+
+        MainActivity.lists.removeList(userListPos);
+        MainActivity.lists.addList(userList);
+
         adapter.notifyItemInserted(pos);
+        MainActivity.lists.updateList(MainActivity.lists.lists);
+        MainActivity.lists.saveLists();
     }
 
     public static UserListFragment getInstance()

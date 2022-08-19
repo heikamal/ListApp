@@ -47,6 +47,8 @@ public class MainListFragment extends Fragment {
         lists.add(newList);
         int pos = lists.indexOf(newList);
         adapter.notifyItemInserted(pos);
+        MainActivity.lists.updateList(lists);
+        MainActivity.lists.saveLists();
     }
 
     public static MainListFragment getInstance()

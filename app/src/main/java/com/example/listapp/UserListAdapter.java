@@ -14,9 +14,9 @@ import java.util.ArrayList;
 public class UserListAdapter extends
         RecyclerView.Adapter<UserListAdapter.ViewHolder>{
 
-    ArrayList<String> list;
+    UserList list;
 
-    public UserListAdapter(ArrayList<String> data){list = data;}
+    public UserListAdapter(UserList data){list = data;}
 
     @NonNull
     @Override
@@ -30,12 +30,12 @@ public class UserListAdapter extends
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.itemView.setTag(position);
 
-        holder.checkBox.setText(list.get(position));
+        holder.checkBox.setText(list.getList().get(position));
     }
 
     @Override
     public int getItemCount() {
-        return list.size();
+        return list.getLength();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder{
