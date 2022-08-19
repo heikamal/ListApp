@@ -9,6 +9,9 @@ import java.io.OutputStream;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
+/**
+ * Luokka listojen muokkaamiseen, lisäämiseen, lukemiseen ja tallentamiseen tarkoitettuihin metodeihin.
+ */
 public class ListsOfLists {
 
     ArrayList<UserList> lists;

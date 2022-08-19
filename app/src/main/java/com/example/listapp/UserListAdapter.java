@@ -30,7 +30,7 @@ public class UserListAdapter extends
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.itemView.setTag(position);
 
-        holder.textView.setText(list.get(position));
+        holder.checkBox.setText(list.get(position));
     }
 
     @Override
@@ -40,13 +40,11 @@ public class UserListAdapter extends
 
     public static class ViewHolder extends RecyclerView.ViewHolder{
         public final CheckBox checkBox;
-        public final TextView textView;
 
         public ViewHolder(View itemView) {
             super(itemView);
 
             checkBox= (CheckBox) itemView.findViewById(R.id.cbTikki);
-            textView = (TextView) itemView.findViewById(R.id.tvListName);
         }
     }
 }

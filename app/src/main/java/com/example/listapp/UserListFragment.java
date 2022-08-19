@@ -16,6 +16,11 @@ import java.util.ArrayList;
  */
 public class UserListFragment extends Fragment {
 
+    ArrayList<String> list;
+    UserListAdapter adapter;
+
+    private static UserListFragment instance;
+
     public UserListFragment() {
         super(R.layout.fragment_list_user);
     }
@@ -23,12 +28,26 @@ public class UserListFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 
-        RecyclerView rvUserList = view.findViewById(R.id.rvUserList);
-        ArrayList<String> list = getArguments().getStringArrayList("userList");
+        instance = this;
 
-        rvUserList.setAdapter(new UserListAdapter(list));
+        RecyclerView rvUserList = view.findViewById(R.id.rvUserList);
+        list = getArguments().getStringArrayList("userList");
+
+        adapter = new UserListAdapter(list);
+        rvUserList.setAdapter(adapter);
         rvUserList.setLayoutManager(new LinearLayoutManager(getContext()));
 
         super.onViewCreated(view, savedInstanceState);
+    }
+
+    public void updateList(String text){
+        list.add(text);
+        int pos = list.indexOf(text);
+        adapter.notifyItemInserted(pos);
+    }
+
+    public static UserListFragment getInstance()
+    {
+        return instance;
     }
 }
