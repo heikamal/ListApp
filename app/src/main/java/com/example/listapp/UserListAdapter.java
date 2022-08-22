@@ -89,6 +89,7 @@ public class UserListAdapter extends
             super(itemView);
 
             checkBox= (CheckBox) itemView.findViewById(R.id.cbTikki);
+
         }
     }
 }

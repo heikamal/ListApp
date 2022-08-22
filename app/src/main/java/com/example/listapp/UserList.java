@@ -121,4 +121,8 @@ public class UserList implements Serializable {
     public void getItem(int position){
         list.get(position);
     }
+
+    public void removeItem(int position){
+        list.remove(position);
+    }
 }
