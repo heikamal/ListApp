@@ -9,6 +9,7 @@ import java.util.ArrayList;
 public class UserList implements Serializable {
 
     private String name;
+    private ArrayList<Boolean> checkedItems;
 
     /**
      * Olion säilömä lista merkkijonoja.
@@ -46,6 +47,15 @@ public class UserList implements Serializable {
         return length;
     }
 
+    public ArrayList<Boolean> getCheckedItems() {
+        return checkedItems;
+    }
+
+    public void setCheckedItems(ArrayList<Boolean> checkedItems) {
+        this.checkedItems = checkedItems;
+    }
+
+
     /**
      * Parametrillinen alustaja.
      * @param list
@@ -58,6 +68,7 @@ public class UserList implements Serializable {
     public UserList(String name){
         this.name = name;
         this.list = new ArrayList<>();
+        this.checkedItems = new ArrayList<>();
     }
 
     /**
@@ -66,6 +77,7 @@ public class UserList implements Serializable {
      */
     public void addToList(String addition){
         list.add(addition);
+        checkedItems.add(false);
     }
 
     public void getItem(int position){

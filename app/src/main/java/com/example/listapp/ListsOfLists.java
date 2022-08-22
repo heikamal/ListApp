@@ -72,14 +72,19 @@ public class ListsOfLists {
                 System.out.println(e);
             }
         } else {
+
+            //testilistat
+            // TODO: remove test
             UserList test1 = new UserList(new ArrayList<>());
             test1.setName("TODO");
+            test1.setCheckedItems(new ArrayList<>());
             test1.addToList("pyykkää");
             test1.addToList("tiskaa");
             test1.addToList("soita äidille");
 
             UserList test2 = new UserList(new ArrayList<>());
             test2.setName("Kauppalista");
+            test2.setCheckedItems(new ArrayList<>());
             test2.addToList("maitoa");
             test2.addToList("munia");
             test2.addToList("leipää");

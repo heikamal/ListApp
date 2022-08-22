@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
                 m_Text = input.getText().toString();
                 UserList newList = new UserList(m_Text);
                 lists.addList(newList);
-                frag.updateList(newList);
+                MainListFragment.updateList(newList);
             }
         });
         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -83,8 +83,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 m_Text = input.getText().toString();
-                UserListFragment frag = UserListFragment.getInstance();
-                frag.updateList(m_Text);
+                UserListFragment.updateList(m_Text);
             }
         });
         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {

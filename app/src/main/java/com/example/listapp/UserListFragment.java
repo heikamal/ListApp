@@ -17,8 +17,8 @@ import java.util.ArrayList;
 public class UserListFragment extends Fragment {
 
     ArrayList<String> list;
-    UserList userList;
-    UserListAdapter adapter;
+    static UserList userList;
+    static UserListAdapter adapter;
 
     private static UserListFragment instance;
 
@@ -41,7 +41,7 @@ public class UserListFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
     }
 
-    public void updateList(String text){
+    public static void updateList(String text){
         int userListPos = MainActivity.lists.findList(userList);
 
         userList.addToList(text);

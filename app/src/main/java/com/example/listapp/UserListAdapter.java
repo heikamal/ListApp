@@ -4,6 +4,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -31,6 +32,21 @@ public class UserListAdapter extends
         holder.itemView.setTag(position);
 
         holder.checkBox.setText(list.getList().get(position));
+        holder.checkBox.setChecked(list.getCheckedItems().get(position));
+
+        holder.checkBox.setOnCheckedChangeListener((compoundButton, isChecked) -> {
+            if (isChecked){
+                list.getCheckedItems().set(holder.getAdapterPosition(), true);
+            } else {
+                list.getCheckedItems().set(holder.getAdapterPosition(), false);
+            }
+            int userListPos = MainActivity.lists.findList(list);
+            MainActivity.lists.removeList(userListPos);
+            MainActivity.lists.addList(list);
+            MainActivity.lists.updateList(MainActivity.lists.lists);
+            MainActivity.lists.saveLists();
+
+        });
     }
 
     @Override

@@ -21,8 +21,8 @@ import java.util.ArrayList;
  */
 public class MainListFragment extends Fragment {
 
-    ArrayList<UserList> lists;
-    MainListAdapter adapter;
+    static ArrayList<UserList> lists;
+    static MainListAdapter adapter;
 
     private static MainListFragment instance;
 
@@ -43,7 +43,7 @@ public class MainListFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
     }
 
-    public void updateList(UserList newList){
+    public static void updateList(UserList newList){
         lists.add(newList);
         int pos = lists.indexOf(newList);
         adapter.notifyItemInserted(pos);
