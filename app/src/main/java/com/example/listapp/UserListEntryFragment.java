@@ -13,8 +13,16 @@ import android.view.View;
  */
 public class UserListEntryFragment extends Fragment {
 
+    /**
+     *
+     */
     public UserListEntryFragment() {super(R.layout.user_list_entry);}
 
+    /**
+     *
+     * @param view
+     * @param savedInstanceState
+     */
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);

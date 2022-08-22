@@ -1,7 +1,5 @@
 package com.example.listapp;
 
-import android.content.Context;
-
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -14,7 +12,6 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutput;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
@@ -22,14 +19,28 @@ import java.util.ArrayList;
  */
 public class ListsOfLists {
 
+    /**
+     *
+     */
     ArrayList<UserList> lists;
+
+    /**
+     *
+     */
     static File listFile;
 
+    /**
+     *
+     * @param file
+     */
     public ListsOfLists(File file){
         listFile = file;
         this.lists = fetchLists();
     }
 
+    /**
+     *
+     */
     public void saveLists(){
         try{
             OutputStream file = new FileOutputStream(listFile);
@@ -46,9 +57,11 @@ public class ListsOfLists {
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public ArrayList<UserList> fetchLists(){
-
-
         ArrayList<UserList> list = new ArrayList<>();
 
         if (listFile.exists()){
@@ -97,18 +110,35 @@ public class ListsOfLists {
         return list;
     }
 
+    /**
+     *
+     * @param updated
+     */
     public void updateList(ArrayList<UserList> updated){
         lists = updated;
     }
 
+    /**
+     *
+     * @param addition
+     */
     public void addList(UserList addition){
         lists.add(addition);
     }
 
+    /**
+     *
+     * @param pos
+     */
     public void removeList(int pos){
         lists.remove(pos);
     }
 
+    /**
+     *
+     * @param find
+     * @return
+     */
     public int findList(UserList find){
 
         for (UserList i : lists){

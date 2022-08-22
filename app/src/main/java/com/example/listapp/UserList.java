@@ -8,7 +8,14 @@ import java.util.ArrayList;
  */
 public class UserList implements Serializable {
 
+    /**
+     *
+     */
     private String name;
+
+    /**
+     *
+     */
     private ArrayList<Boolean> checkedItems;
 
     /**
@@ -16,12 +23,23 @@ public class UserList implements Serializable {
      */
     private ArrayList<String> list;
 
+    /**
+     *
+     */
     private int length;
 
+    /**
+     *
+     * @return
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     *
+     * @param name
+     */
     public void setName(String name) {
         this.name = name;
     }
@@ -42,15 +60,27 @@ public class UserList implements Serializable {
         this.list = list;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getLength(){
         this.length = this.list.size();
         return length;
     }
 
+    /**
+     *
+     * @return
+     */
     public ArrayList<Boolean> getCheckedItems() {
         return checkedItems;
     }
 
+    /**
+     *
+     * @param checkedItems
+     */
     public void setCheckedItems(ArrayList<Boolean> checkedItems) {
         this.checkedItems = checkedItems;
     }
@@ -65,6 +95,10 @@ public class UserList implements Serializable {
         this.length = list.size();
     }
 
+    /**
+     *
+     * @param name
+     */
     public UserList(String name){
         this.name = name;
         this.list = new ArrayList<>();
@@ -80,6 +114,10 @@ public class UserList implements Serializable {
         checkedItems.add(false);
     }
 
+    /**
+     *
+     * @param position
+     */
     public void getItem(int position){
         list.get(position);
     }

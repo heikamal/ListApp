@@ -16,16 +16,33 @@ import java.util.ArrayList;
  */
 public class UserListFragment extends Fragment {
 
-    ArrayList<String> list;
+    /**
+     *
+     */
     static UserList userList;
+
+    /**
+     *
+     */
     static UserListAdapter adapter;
 
+    /**
+     *
+     */
     private static UserListFragment instance;
 
+    /**
+     *
+     */
     public UserListFragment() {
         super(R.layout.fragment_list_user);
     }
 
+    /**
+     *
+     * @param view
+     * @param savedInstanceState
+     */
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 
@@ -41,6 +58,10 @@ public class UserListFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
     }
 
+    /**
+     *
+     * @param text
+     */
     public static void updateList(String text){
         int userListPos = MainActivity.lists.findList(userList);
 
@@ -55,6 +76,10 @@ public class UserListFragment extends Fragment {
         MainActivity.lists.saveLists();
     }
 
+    /**
+     *
+     * @return
+     */
     public static UserListFragment getInstance()
     {
         return instance;

@@ -21,13 +21,31 @@ import java.util.ArrayList;
  */
 public class MainListFragment extends Fragment {
 
+    /**
+     *
+     */
     static ArrayList<UserList> lists;
+
+    /**
+     *
+     */
     static MainListAdapter adapter;
 
+    /**
+     *
+     */
     private static MainListFragment instance;
 
+    /**
+     *
+     */
     public MainListFragment() {super(R.layout.fragment_list_main);}
 
+    /**
+     *
+     * @param view
+     * @param savedInstanceState
+     */
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 
@@ -43,6 +61,10 @@ public class MainListFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
     }
 
+    /**
+     *
+     * @param newList
+     */
     public static void updateList(UserList newList){
         lists.add(newList);
         int pos = lists.indexOf(newList);
@@ -51,11 +73,19 @@ public class MainListFragment extends Fragment {
         MainActivity.lists.saveLists();
     }
 
+    /**
+     *
+     * @return
+     */
     public static MainListFragment getInstance()
     {
         return instance;
     }
 
+    /**
+     *
+     * @return
+     */
     public UserList[] getLists(){
         UserList test1 = new UserList(new ArrayList<>());
         test1.setName("TODO");

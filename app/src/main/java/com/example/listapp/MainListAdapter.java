@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -14,14 +13,29 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-
+/**
+ *
+ */
 public class MainListAdapter extends
         RecyclerView.Adapter<MainListAdapter.ViewHolder>{
 
+    /**
+     *
+     */
     ArrayList<UserList> lists;
 
+    /**
+     *
+     * @param data
+     */
     public MainListAdapter(ArrayList<UserList> data){lists = data;}
 
+    /**
+     *
+     * @param parent
+     * @param viewType
+     * @return
+     */
     @NonNull
     @Override
     public MainListAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -30,6 +44,11 @@ public class MainListAdapter extends
         return new MainListAdapter.ViewHolder(view);
     }
 
+    /**
+     *
+     * @param holder
+     * @param position
+     */
     @Override
     public void onBindViewHolder(@NonNull MainListAdapter.ViewHolder holder, int position) {
         holder.itemView.setTag(position);
@@ -38,11 +57,18 @@ public class MainListAdapter extends
         holder.textView.setText(lists.get(position).getName());
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public int getItemCount() {
         return lists.size();
     }
 
+    /**
+     *
+     */
     View.OnClickListener MainListClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -54,6 +80,9 @@ public class MainListAdapter extends
         }
     };
 
+    /**
+     *
+     */
     public static class ViewHolder extends RecyclerView.ViewHolder{
         public final TextView textView;
 

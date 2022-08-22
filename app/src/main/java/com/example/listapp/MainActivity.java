@@ -19,12 +19,25 @@ import java.io.File;
  */
 public class MainActivity extends AppCompatActivity {
 
+    /**
+     *
+     */
     static ListsOfLists lists;
 
+    /**
+     *
+     */
     static MainListFragment frag;
 
+    /**
+     *
+     */
     private String m_Text = "";
 
+    /**
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -36,10 +49,14 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 
+    /**
+     *
+     * @param view
+     */
     public void newList(View view){
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Listan nimi");
+        builder.setTitle(R.string.new_list_title);
 
         // Set up the input
         final EditText input = new EditText(this);
@@ -48,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
         builder.setView(input);
 
         // Set up the buttons
-        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 m_Text = input.getText().toString();
@@ -57,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
                 MainListFragment.updateList(newList);
             }
         });
-        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton(R.string.nay, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.cancel();
@@ -67,9 +84,13 @@ public class MainActivity extends AppCompatActivity {
         builder.show();
     }
 
+    /**
+     *
+     * @param view
+     */
     public void newItem(View view){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Uusi merkintä");
+        builder.setTitle(R.string.new_list_item);
 
         // Set up the input
         final EditText input = new EditText(this);
@@ -79,14 +100,14 @@ public class MainActivity extends AppCompatActivity {
         builder.setView(input);
 
         // Set up the buttons
-        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 m_Text = input.getText().toString();
                 UserListFragment.updateList(m_Text);
             }
         });
-        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton(R.string.nay, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.cancel();
