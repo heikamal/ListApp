@@ -62,11 +62,7 @@ public class UserListAdapter extends
             } else {
                 list.getCheckedItems().set(holder.getAdapterPosition(), false);
             }
-            int userListPos = MainActivity.lists.findList(list);
-            MainActivity.lists.removeList(userListPos);
-            MainActivity.lists.addList(list);
-            MainActivity.lists.updateList(MainActivity.lists.lists);
-            MainActivity.lists.saveLists();
+            updateMaster();
 
         });
 
@@ -78,12 +74,7 @@ public class UserListAdapter extends
                 int itemPos = holder.getAdapterPosition();
                 list.removeItem(itemPos);
                 notifyItemRemoved(itemPos);
-
-                int userListPos = MainActivity.lists.findList(list);
-                MainActivity.lists.removeList(userListPos);
-                MainActivity.lists.addList(list);
-                MainActivity.lists.updateList(MainActivity.lists.lists);
-                MainActivity.lists.saveLists();
+                updateMaster();
             });
 
             builder.setNegativeButton(R.string.nay, (dialog, which) -> dialog.cancel());
@@ -100,6 +91,14 @@ public class UserListAdapter extends
     @Override
     public int getItemCount() {
         return list.getLength();
+    }
+
+    public void updateMaster(){
+        int userListPos = MainActivity.lists.findList(list);
+        MainActivity.lists.removeList(userListPos);
+        MainActivity.lists.addList(list);
+        MainActivity.lists.updateList(MainActivity.lists.lists);
+        MainActivity.lists.saveLists();
     }
 
     /**

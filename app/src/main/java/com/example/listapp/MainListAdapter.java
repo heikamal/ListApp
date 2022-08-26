@@ -1,5 +1,6 @@
 package com.example.listapp;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -53,6 +54,24 @@ public class MainListAdapter extends
     public void onBindViewHolder(@NonNull MainListAdapter.ViewHolder holder, int position) {
         holder.itemView.setTag(position);
         holder.itemView.setOnClickListener(MainListClickListener);
+        holder.itemView.setOnLongClickListener(view -> {
+            AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
+            builder.setTitle(R.string.remove_prompt);
+
+            builder.setPositiveButton(R.string.ok, (dialog, which) -> {
+                int itemPos = holder.getAdapterPosition();
+                lists.remove(itemPos);
+                notifyItemRemoved(itemPos);
+
+                MainActivity.lists.updateList(MainActivity.lists.lists);
+                MainActivity.lists.saveLists();
+            });
+
+            builder.setNegativeButton(R.string.nay, (dialog, which) -> dialog.cancel());
+            builder.show();
+
+            return true;
+        });
 
         holder.textView.setText(lists.get(position).getName());
     }
