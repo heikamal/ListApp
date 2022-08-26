@@ -15,27 +15,30 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 /**
- *
+ * Päälistan adapteri RecyclerView-oliolle.
  */
 public class MainListAdapter extends
         RecyclerView.Adapter<MainListAdapter.ViewHolder>{
 
     /**
-     *
+     * Päälista, sisältää kaikki käyttäjän listat.
      */
     ArrayList<UserList> lists;
 
     /**
+     * Parametrillinen alustaja. Asettaa päälistan saamansa listan mukaiseksi.
      *
-     * @param data
+     * @param data Luonnissa tullut päälista.
      */
     public MainListAdapter(ArrayList<UserList> data){lists = data;}
 
     /**
+     * Adapterin luonnissa ajettava metodi. Käyttää layoutinflateria asettaakseen päälistan
+     * entry-fragmentin tyylin listan alkioihin ja palauttaa ViewHolderin.
      *
-     * @param parent
-     * @param viewType
-     * @return
+     * @param parent "vanhempana" toimiva ViewGroup.
+     * @param viewType View-olion tyyppi kokonaislukuna.
+     * @return MainListAdapter-luokan ViewHolder
      */
     @NonNull
     @Override
@@ -46,20 +49,65 @@ public class MainListAdapter extends
     }
 
     /**
+     * onBindViewHolder-metodi, joka ajetaan adapteria luodessa. Asettaa jokaisella RecyclerViewin
+     * alkiolle näiden indeksiluvun, painalluksien kuuntelijat ja listan esitettävän nimen.
      *
-     * @param holder
-     * @param position
+     * @param holder ViewHolder-olio, joka pitää sisällään listan alkoioiden tyylit
+     * @param position Listan alkion järjestysluku listalla.
      */
     @Override
     public void onBindViewHolder(@NonNull MainListAdapter.ViewHolder holder, int position) {
         holder.itemView.setTag(position);
-        holder.itemView.setOnClickListener(MainListClickListener);
-        holder.itemView.setOnLongClickListener(view -> {
-            AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
+        holder.itemView.setOnClickListener(mainListClickListener);
+        holder.itemView.setOnLongClickListener(mainListLongClickListener);
+
+        holder.textView.setText(lists.get(position).getName());
+    }
+
+    /**
+     * Palauttaa listan koon.
+     *
+     * @return Päälistan pituus.
+     */
+    @Override
+    public int getItemCount() {
+        return lists.size();
+    }
+
+    View.OnClickListener mainListClickListener = new View.OnClickListener() {
+        /**
+         * onClick-metodi, joka hakee valitun käyttäjälistan ja avaa sen näkyviin. Hakee oikean
+         * käyttäjälistan tämän indeksiluvun perusteella ja pakkaa bundleen mikä lähetetään
+         * NavController-oliolla seuraavalle fragmentille.
+         *
+         * @param v Painettu listan kohta.
+         */
+        @Override
+        public void onClick(View v) {
+            int position = (int) v.getTag();
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("userList", lists.get(position));
+            NavController navController = Navigation.findNavController(v);
+            navController.navigate(R.id.userListFragment, bundle);
+        }
+    };
+
+    View.OnLongClickListener mainListLongClickListener = new View.OnLongClickListener() {
+        /**
+         * onLongClick-metodi pitkän painalluksen kuuntelijalle. Avaa AlertDialogin kysyäkseen
+         * käyttäjältä haluaako tämä poistaa listan mitä painoi. Jos käyttäjä painaa ok-painiketta,
+         * metodi poistaa valitun käyttäjälistan ja päivittää pääistan notifyItemRemoved-metodilla.
+         *
+         * @param v Listan kohta mitä painetaan.
+         * @return Totuusarvomuuttuja. Tässä tapauksessa palauttaa aina toden.
+         */
+        @Override
+        public boolean onLongClick(View v) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
             builder.setTitle(R.string.remove_prompt);
 
             builder.setPositiveButton(R.string.ok, (dialog, which) -> {
-                int itemPos = holder.getAdapterPosition();
+                int itemPos = (int) v.getTag();
                 lists.remove(itemPos);
                 notifyItemRemoved(itemPos);
 
@@ -71,40 +119,23 @@ public class MainListAdapter extends
             builder.show();
 
             return true;
-        });
-
-        holder.textView.setText(lists.get(position).getName());
-    }
-
-    /**
-     *
-     * @return
-     */
-    @Override
-    public int getItemCount() {
-        return lists.size();
-    }
-
-    /**
-     *
-     */
-    View.OnClickListener MainListClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            int position = (int) v.getTag();
-            Bundle bundle = new Bundle();
-            bundle.putSerializable("userList", lists.get(position));
-            NavController navController = Navigation.findNavController(v);
-            navController.navigate(R.id.userListFragment, bundle);
         }
     };
 
     /**
-     *
+     * Aliluokka ViewHolderia vasten. Perii RecyclerView.ViewHolder-luokan.
      */
     public static class ViewHolder extends RecyclerView.ViewHolder{
+        /**
+         * Holderissa oleva TextView listojen nimien esittämiseen
+         */
         public final TextView textView;
 
+        /**
+         * Parametrillinen alustaja. Hakee oikean TextView-olion asettaakseen sen muuttujaan.
+         *
+         * @param itemView
+         */
         public ViewHolder(View itemView) {
             super(itemView);
 

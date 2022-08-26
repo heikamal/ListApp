@@ -1,13 +1,12 @@
 package com.example.listapp;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.View;
 import android.widget.EditText;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.File;
 
@@ -17,23 +16,25 @@ import java.io.File;
 public class MainActivity extends AppCompatActivity {
 
     /**
-     *
+     * Päälista. Lista, joka sisältää kaikki käyttäjän listat.
      */
     static ListsOfLists lists;
 
     /**
-     *
+     * Viittaus päälistan fragmenttiin.
      */
     static MainListFragment frag;
 
     /**
-     *
+     * Merkkijono säilyttämään käyttäjän sytteet.
      */
     private String inputText = "";
 
     /**
+     * onCreate-metodi, joka ajetaan kun ohjelma käynnistetään. Asettaa ohjelman käyttämän
+     * tiedostopolun, päälistan fragmentin ja päälistan itsessään.
      *
-     * @param savedInstanceState
+     * @param savedInstanceState Oletusparametrina saatava käynnistyksen bundle.
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,8 +48,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
+     * Metodi uuden listan luontiin. Avaa alertdialogin joka kysyy käyttäjältä uuden listan
+     * nimeä ja lisää uuden listan päälistaan.
      *
-     * @param view
+     * @param view Metodia kutsunut View-olio.
      */
     public void newList(View view){
 
@@ -59,28 +62,22 @@ public class MainActivity extends AppCompatActivity {
         input.setInputType(InputType.TYPE_CLASS_TEXT);
         builder.setView(input);
 
-        builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                inputText = input.getText().toString();
-                UserList newList = new UserList(inputText);
-                lists.addList(newList);
-                MainListFragment.updateList(newList);
-            }
+        builder.setPositiveButton(R.string.ok, (dialog, which) -> {
+            inputText = input.getText().toString();
+            UserList newList = new UserList(inputText);
+            lists.addList(newList);
+            MainListFragment.updateList(newList);
         });
-        builder.setNegativeButton(R.string.nay, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.cancel();
-            }
-        });
+        builder.setNegativeButton(R.string.nay, (dialog, which) -> dialog.cancel());
 
         builder.show();
     }
 
     /**
+     * Metodi uuden listan kohdan luontiin. Avaa AlertDialogin, joka kysyy käyttäjältä listan kohdan
+     * tekstiä
      *
-     * @param view
+     * @param view Metodia kutsunut View-olio.
      */
     public void newItem(View view){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -91,19 +88,11 @@ public class MainActivity extends AppCompatActivity {
         input.setInputType(InputType.TYPE_CLASS_TEXT);
         builder.setView(input);
 
-        builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                inputText = input.getText().toString();
-                UserListFragment.updateList(inputText);
-            }
+        builder.setPositiveButton(R.string.ok, (dialog, which) -> {
+            inputText = input.getText().toString();
+            UserListFragment.updateList(inputText);
         });
-        builder.setNegativeButton(R.string.nay, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.cancel();
-            }
-        });
+        builder.setNegativeButton(R.string.nay, (dialog, which) -> dialog.cancel());
 
         builder.show();
     }

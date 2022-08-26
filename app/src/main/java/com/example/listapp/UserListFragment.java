@@ -12,36 +12,38 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 /**
- * Luokka fragmentille, jonka on tarkoitus esittää käyttäjän luoma lista.
+ * Luokka fragmentille, jonka on tarkoitus esittää käyttäjän luoma lista. Perii Fragment-luokan.
  */
 public class UserListFragment extends Fragment {
 
     /**
-     *
+     * Käsiteltävä käyttäjälista.
      */
     static UserList userList;
 
     /**
-     *
+     * RecyclerView-olion käyttämä adapteri.
      */
     static UserListAdapter adapter;
 
     /**
-     *
+     * Fragmentti-olio joka sisällyttää viittauksen tähän fragmenttiin.
      */
     private static UserListFragment instance;
 
     /**
-     *
+     * Parametritön alustaja.
      */
     public UserListFragment() {
         super(R.layout.fragment_list_user);
     }
 
     /**
+     * onViewCreated-metodi, joka ajetaan aina Viewiä luodessa. Määrittää käytettävät
+     * komponentit, fragmentin instanssin ja adapterin.
      *
-     * @param view
-     * @param savedInstanceState
+     * @param view Parametreinä saatu View-luokan olio.
+     * @param savedInstanceState Bundle instanssin tilalle.
      */
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -59,8 +61,11 @@ public class UserListFragment extends Fragment {
     }
 
     /**
+     * Metodi käyttäjälistaan kohdan lisäämiselle. Lisää annetun merkkijonon listaan uudeksi kohdaksi
+     * UserList-luokan metodeita käyttäen, päivittää nykyisen näkymän ja päivittää käyttäjälistan
+     * päälistaan.
      *
-     * @param text
+     * @param text Listaan lisättävä merkkijono.
      */
     public static void updateList(String text){
         int userListPos = MainActivity.lists.findList(userList);
@@ -77,8 +82,8 @@ public class UserListFragment extends Fragment {
     }
 
     /**
-     *
-     * @return
+     * Palauttaa tallennetun fragment-olion.
+     * @return UserListFragment-olio, joka sisällyttää viittauksen nykyiseen fragmenttiin.
      */
     public static UserListFragment getInstance()
     {

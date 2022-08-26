@@ -82,25 +82,4 @@ public class MainListFragment extends Fragment {
         return instance;
     }
 
-    /**
-     *
-     * @return
-     */
-    public UserList[] getLists(){
-        UserList test1 = new UserList(new ArrayList<>());
-        test1.setName("TODO");
-        test1.addToList("pyykkää");
-        test1.addToList("tiskaa");
-        test1.addToList("soita äidille");
-
-        UserList test2 = new UserList(new ArrayList<>());
-        test2.setName("Kauppalista");
-        test2.addToList("maitoa");
-        test2.addToList("munia");
-        test2.addToList("leipää");
-
-        UserList[] list = new UserList[]{test1, test2};
-
-        return list;
-    }
 }
