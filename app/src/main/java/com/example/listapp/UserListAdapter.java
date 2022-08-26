@@ -1,9 +1,14 @@
 package com.example.listapp;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -52,7 +57,7 @@ public class UserListAdapter extends
         holder.checkBox.setChecked(list.getCheckedItems().get(position));
 
         holder.checkBox.setOnCheckedChangeListener((compoundButton, isChecked) -> {
-            if (isChecked){
+            if (isChecked) {
                 list.getCheckedItems().set(holder.getAdapterPosition(), true);
             } else {
                 list.getCheckedItems().set(holder.getAdapterPosition(), false);
@@ -63,6 +68,28 @@ public class UserListAdapter extends
             MainActivity.lists.updateList(MainActivity.lists.lists);
             MainActivity.lists.saveLists();
 
+        });
+
+        holder.checkBox.setOnLongClickListener(pView -> {
+            AlertDialog.Builder builder = new AlertDialog.Builder(pView.getContext());
+            builder.setTitle(R.string.remove_prompt);
+
+            builder.setPositiveButton(R.string.ok, (dialog, which) -> {
+                int itemPos = holder.getAdapterPosition();
+                list.removeItem(itemPos);
+                notifyItemRemoved(itemPos);
+
+                int userListPos = MainActivity.lists.findList(list);
+                MainActivity.lists.removeList(userListPos);
+                MainActivity.lists.addList(list);
+                MainActivity.lists.updateList(MainActivity.lists.lists);
+                MainActivity.lists.saveLists();
+            });
+
+            builder.setNegativeButton(R.string.nay, (dialog, which) -> dialog.cancel());
+            builder.show();
+
+            return true;
         });
     }
 

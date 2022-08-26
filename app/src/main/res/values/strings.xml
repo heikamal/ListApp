@@ -7,4 +7,5 @@
     <string name="ok">Confirm</string>
     <string name="nay">Cancel</string>
     <string name="new_list_item">New Item:</string>
+    <string name="remove_prompt">Remove?</string>
 </resources>

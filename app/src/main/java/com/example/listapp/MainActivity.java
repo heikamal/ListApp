@@ -1,11 +1,8 @@
 package com.example.listapp;
 
-import androidx.annotation.MainThread;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.text.InputType;
@@ -32,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
     /**
      *
      */
-    private String m_Text = "";
+    private String inputText = "";
 
     /**
      *
@@ -58,18 +55,15 @@ public class MainActivity extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(R.string.new_list_title);
 
-        // Set up the input
         final EditText input = new EditText(this);
-        // Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
         input.setInputType(InputType.TYPE_CLASS_TEXT);
         builder.setView(input);
 
-        // Set up the buttons
         builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                m_Text = input.getText().toString();
-                UserList newList = new UserList(m_Text);
+                inputText = input.getText().toString();
+                UserList newList = new UserList(inputText);
                 lists.addList(newList);
                 MainListFragment.updateList(newList);
             }
@@ -92,19 +86,16 @@ public class MainActivity extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(R.string.new_list_item);
 
-        // Set up the input
         final EditText input = new EditText(this);
 
-        // Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
         input.setInputType(InputType.TYPE_CLASS_TEXT);
         builder.setView(input);
 
-        // Set up the buttons
         builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                m_Text = input.getText().toString();
-                UserListFragment.updateList(m_Text);
+                inputText = input.getText().toString();
+                UserListFragment.updateList(inputText);
             }
         });
         builder.setNegativeButton(R.string.nay, new DialogInterface.OnClickListener() {
