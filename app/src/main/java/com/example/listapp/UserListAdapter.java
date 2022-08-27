@@ -77,7 +77,7 @@ public class UserListAdapter extends
             builder.setTitle(R.string.remove_prompt);
 
             builder.setPositiveButton(R.string.ok, (dialog, which) -> {
-                int itemPos = (int) view.getTag();
+                int itemPos = holder.getAdapterPosition();
                 list.removeItem(itemPos);
                 UserListAdapter.this.notifyItemRemoved(itemPos);
                 UserListAdapter.this.updateMaster();
