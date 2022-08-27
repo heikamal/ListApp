@@ -111,6 +111,7 @@ public class MainListAdapter extends
                 lists.remove(itemPos);
                 notifyItemRemoved(itemPos);
 
+                MainActivity.lists.removeList(itemPos);
                 MainActivity.lists.updateList(MainActivity.lists.lists);
                 MainActivity.lists.saveLists();
             });
