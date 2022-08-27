@@ -31,6 +31,11 @@ public class MainActivity extends AppCompatActivity {
     private String inputText = "";
 
     /**
+     * Vakio merkkijono tallennustiedoston nimelle
+     */
+    private final String FILENAME = "lists.bat";
+
+    /**
      * onCreate-metodi, joka ajetaan kun ohjelma käynnistetään. Asettaa ohjelman käyttämän
      * tiedostopolun, päälistan fragmentin ja päälistan itsessään.
      *
@@ -39,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        File file = new File(getFilesDir() + "/lists.bin");
+        File file = new File(getFilesDir() + "/" + FILENAME);
         frag = MainListFragment.getInstance();
 
         lists = new ListsOfLists(file);
