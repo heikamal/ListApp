@@ -14,7 +14,7 @@ import android.view.View;
 public class UserListEntryFragment extends Fragment {
 
     /**
-     * Parametritön alustaja.
+     * Parametritön alustaja. Määrittää käytettänä layoutin.
      */
     public UserListEntryFragment() {super(R.layout.user_list_entry);}
 

@@ -14,7 +14,7 @@ import androidx.fragment.app.Fragment;
 public class MainListEntryFragment extends Fragment {
 
     /**
-     * Parametritön muuttuja.
+     * Parametritön muuttuja. Määrittää käytettävän Layoutin.
      */
     public MainListEntryFragment() {
         super(R.layout.main_list_entry);
