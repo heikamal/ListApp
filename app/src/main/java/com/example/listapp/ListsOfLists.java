@@ -45,15 +45,11 @@ public class ListsOfLists {
         try{
             OutputStream file = new FileOutputStream(listFile);
             OutputStream buffer = new BufferedOutputStream(file);
-            ObjectOutput output = new ObjectOutputStream(buffer);
-            try{
+            try (ObjectOutput output = new ObjectOutputStream(buffer)) {
                 output.writeObject(lists);
             }
-            finally{
-                output.close();
-            }
         } catch(IOException e){
-            System.out.println(e);
+            e.printStackTrace();
         }
     }
 
@@ -71,18 +67,14 @@ public class ListsOfLists {
             try{
                 InputStream file = new FileInputStream(listFile);
                 InputStream buffer = new BufferedInputStream(file);
-                ObjectInput input = new ObjectInputStream(buffer);
-                try{
+                try (ObjectInput input = new ObjectInputStream(buffer)) {
                     list = (ArrayList<UserList>) input.readObject();
-                    for(UserList userList: list){
+                    for (UserList userList : list) {
                         System.out.println(userList);
                     }
                 }
-                finally{
-                    input.close();
-                }
             } catch (IOException | ClassNotFoundException e){
-                System.out.println(e);
+                e.printStackTrace();
             }
         } else {
 
