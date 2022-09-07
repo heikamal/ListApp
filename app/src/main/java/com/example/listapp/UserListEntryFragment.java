@@ -13,8 +13,17 @@ import android.view.View;
  */
 public class UserListEntryFragment extends Fragment {
 
+    /**
+     * Parametritön alustaja. Määrittää käytettänä layoutin.
+     */
     public UserListEntryFragment() {super(R.layout.user_list_entry);}
 
+    /**
+     * onViewCreated-metodi, joka ajetaan kun view luodaan.
+     *
+     * @param view Parametreinä saatu view.
+     * @param savedInstanceState Bundle instancen tilalle.
+     */
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);

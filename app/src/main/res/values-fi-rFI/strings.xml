@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ListaSovellus</string>
+    <string name="hello_blank_fragment">Terve tyhjä fragmentti</string>
+    <string name="button_new">Uusi</string>
+    <string name="new_list_title">Uuden Listan Nimi:</string>
+    <string name="ok">Hyväksy</string>
+    <string name="nay">Peruuta</string>
+    <string name="new_list_item">Uusi Kohta:</string>
+    <string name="remove_prompt">Poista?</string>
+</resources>

@@ -1,16 +1,12 @@
 package com.example.listapp;
 
-import androidx.annotation.MainThread;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-
 import android.app.AlertDialog;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.View;
 import android.widget.EditText;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.File;
 
@@ -19,16 +15,36 @@ import java.io.File;
  */
 public class MainActivity extends AppCompatActivity {
 
+    /**
+     * Päälista. Lista, joka sisältää kaikki käyttäjän listat.
+     */
     static ListsOfLists lists;
 
+    /**
+     * Viittaus päälistan fragmenttiin.
+     */
     static MainListFragment frag;
 
-    private String m_Text = "";
+    /**
+     * Merkkijono säilyttämään käyttäjän sytteet.
+     */
+    private String inputText = "";
 
+    /**
+     * Vakio merkkijono tallennustiedoston nimelle
+     */
+    private final String FILENAME = "lists.bat";
+
+    /**
+     * onCreate-metodi, joka ajetaan kun ohjelma käynnistetään. Asettaa ohjelman käyttämän
+     * tiedostopolun, päälistan fragmentin ja päälistan itsessään.
+     *
+     * @param savedInstanceState Oletusparametrina saatava käynnistyksen bundle.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        File file = new File(getFilesDir() + "/lists.bin");
+        File file = new File(getFilesDir() + "/" + FILENAME);
         frag = MainListFragment.getInstance();
 
         lists = new ListsOfLists(file);
@@ -36,63 +52,52 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 
+    /**
+     * Metodi uuden listan luontiin. Avaa alertdialogin joka kysyy käyttäjältä uuden listan
+     * nimeä ja lisää uuden listan päälistaan.
+     *
+     * @param view Metodia kutsunut View-olio.
+     */
     public void newList(View view){
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Listan nimi");
+        builder.setTitle(R.string.new_list_title);
 
-        // Set up the input
         final EditText input = new EditText(this);
-        // Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
         input.setInputType(InputType.TYPE_CLASS_TEXT);
         builder.setView(input);
 
-        // Set up the buttons
-        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                m_Text = input.getText().toString();
-                UserList newList = new UserList(m_Text);
-                lists.addList(newList);
-                frag.updateList(newList);
-            }
+        builder.setPositiveButton(R.string.ok, (dialog, which) -> {
+            inputText = input.getText().toString();
+            UserList newList = new UserList(inputText);
+            lists.addList(newList);
+            MainListFragment.updateList(newList);
         });
-        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.cancel();
-            }
-        });
+        builder.setNegativeButton(R.string.nay, (dialog, which) -> dialog.cancel());
 
         builder.show();
     }
 
+    /**
+     * Metodi uuden listan kohdan luontiin. Avaa AlertDialogin, joka kysyy käyttäjältä listan kohdan
+     * tekstiä
+     *
+     * @param view Metodia kutsunut View-olio.
+     */
     public void newItem(View view){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Uusi merkintä");
+        builder.setTitle(R.string.new_list_item);
 
-        // Set up the input
         final EditText input = new EditText(this);
 
-        // Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
         input.setInputType(InputType.TYPE_CLASS_TEXT);
         builder.setView(input);
 
-        // Set up the buttons
-        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                m_Text = input.getText().toString();
-                UserListFragment frag = UserListFragment.getInstance();
-                frag.updateList(m_Text);
-            }
+        builder.setPositiveButton(R.string.ok, (dialog, which) -> {
+            inputText = input.getText().toString();
+            UserListFragment.updateList(inputText);
         });
-        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.cancel();
-            }
-        });
+        builder.setNegativeButton(R.string.nay, (dialog, which) -> dialog.cancel());
 
         builder.show();
     }
